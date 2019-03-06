@@ -8,13 +8,14 @@ class CalcsController < ApplicationController
     num2 = params[:num2].to_i
     calc = params[:calc]
     #:calcで計算処理を分岐させる
-    @result = if calc == "addition"
+    @result = case calc
+              when "addition"
                 num1 + num2
-              elsif calc == "subtraction"
+              when "subtraction"
                 num1 - num2
-              elsif calc == "multiplication"
+              when "multiplication"
                 num1 * num2
-              elsif calc == "division"
+              when "division"
                 #0で割る場合、エラーになるので、三項演算子でエラーメッセージも表示できるようにする。
                 num2 == 0 ? "0で割ることはできません" : num1 / num2
               end
