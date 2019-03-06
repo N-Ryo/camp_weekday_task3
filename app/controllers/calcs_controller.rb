@@ -10,16 +10,28 @@ class CalcsController < ApplicationController
     #空の配列@resultsを定義
     @results = []
     #:calcで計算処理を分岐させる。
-    @results << if calc == "addition"
+    @results << case calc
+                when "addition"
                   num1 + num2
-                elsif calc == "subtraction"
+                when "subtraction"
                   num1 - num2
-                elsif calc == "multiplication"
+                when "multiplication"
                   num1 * num2
-                elsif calc == "division"
-                  [num1 / num2 , num1 % num2]
+                when "division"
+                  begin
+                    [num1 / num2 , num1 % num2]
+                  rescue
+                    "divided by #{num2}"
+                  end
                 end
     #divisionで商と余りの配列が入れ子になっているので、flatten!メソッドで均す。
     @results.flatten!
   end
 end
+
+
+
+
+
+
+
